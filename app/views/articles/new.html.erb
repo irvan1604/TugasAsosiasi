@@ -1,0 +1,34 @@
+<%= form_for @article do |f| %>
+<%= f.label :title %>
+&nbsp&nbsp&nbsp&nbsp&nbsp
+<%= f.text_field :title, :autofocus=>true %>
+<%= @article.errors[:title].first unless @article.errors[:title].blank? %>
+<br/>
+<br/>
+<br/>
+<%= f.label :content %>
+<%= f.text_area :content, cols: 40, rows: 10 %>
+<%=   @article.errors[:content].first   unless   @article.errors[:content].blank? %>
+<br/>
+<br/>
+<br/>
+<%= f.label :status %>
+&nbsp&nbsp&nbsp
+<%= f.radio_button :status, "active", :checked => true %>
+<%= label :article_status, 'active' %>
+&nbsp&nbsp&nbsp
+<%= f.radio_button :status, "off" %>
+<%= label :article_status, 'off' %>
+<br/>
+<br/>
+<%= f.submit :POST %>
+<% end %>
+
+<br/>
+<h3>Import CSV file to add new articles! </h3>
+<%= form_tag import_articles_path, multipart: true do %>
+	<%= file_field_tag :file %>
+	<br/>
+	<%= submit_tag "Import", class: 'btn btn-success' %>
+<% end %>
+
